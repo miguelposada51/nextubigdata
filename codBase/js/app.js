@@ -16,6 +16,14 @@ Calculadora = (function () {
        });
        document.getElementById("1").addEventListener("click", function() {
        displayOnScreen(document.getElementById("1"));
+       console.log(document.getElementById("1").width);
+       logo = document.getElementById("1");       
+       
+       document.getElementById("1").onmousedown =  logo.style.width ='27%';
+       setTimeout(function(){ logo.style.width ='29%' }, 1000);
+       //document.getElementById("1").onmouseup = logo.style.width ='29%';
+
+       console.log(document.getElementById("1").width);
        });
 
 
