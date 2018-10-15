@@ -9,31 +9,27 @@ Calculadora = (function () {
 
    //uno.addEventListener("click", publicMethod);
    window.onload=function(){
+      var classname = document.getElementsByClassName("tecla");
+      // al hacer clck en cualquier tecla
+    var obtenerId = function() {
+        var attribute = this.getAttribute("id");
+        //adicionar a la pantalla        
+        displayOnScreen(document.getElementById(attribute));
+        //expandir y contraer al hacer click
+        expanTecla(this);         
+    };
 
-       document.getElementById("0").addEventListener("click", function() {
-       displayOnScreen(document.getElementById("0"));
-       
-       });
-       document.getElementById("1").addEventListener("click", function() {
-       displayOnScreen(document.getElementById("1"));
-       console.log(document.getElementById("1").width);
-       logo = document.getElementById("1");       
-       
-       document.getElementById("1").onmousedown =  logo.style.width ='27%';
-       setTimeout(function(){ logo.style.width ='29%' }, 1000);
-       //document.getElementById("1").onmouseup = logo.style.width ='29%';
-
-       console.log(document.getElementById("1").width);
-       });
-
-
+    for (var i = 0; i < classname.length; i++) {
+        classname[i].addEventListener('click', obtenerId, false);
+    }
    }
    
-  var dos = document.getElementById("2");
-  var tres = document.getElementById("3");
-  var cuatro = document.getElementById("4");
-  var cinco = document.getElementById("5");
-  var seis = document.getElementById("6");
+  function expanTecla(tecla){   
+    document.getElementById(tecla.id).onmousedown =  tecla.style.width ='22.2%';
+    document.getElementById(tecla.id).onmouseup = tecla.style.height ='17.3%';
+    setTimeout(function(){ tecla.style.width ='22%' }, 300);
+    setTimeout(function(){ tecla.style.height ='17%' }, 300);   
+  }
 
  
   // Private methods
