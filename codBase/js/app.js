@@ -25,27 +25,39 @@ Calculadora = (function () {
    }
    
   function expanTecla(tecla){   
-    document.getElementById(tecla.id).onmousedown =  tecla.style.width ='22.2%';
-    document.getElementById(tecla.id).onmouseup = tecla.style.height ='17.3%';
-    setTimeout(function(){ tecla.style.width ='22%' }, 300);
-    setTimeout(function(){ tecla.style.height ='17%' }, 300);   
+    document.getElementById(tecla.id).onmousedown =  tecla.style.width ='76.9px';
+    document.getElementById(tecla.id).onmouseup = tecla.style.height ='62px';
+    setTimeout(function(){ tecla.style.width ='77px' }, 300);
+    setTimeout(function(){ tecla.style.height ='62.5' }, 300);   
   }
 
  
   // Private methods
   function displayOnScreen(num) {
-    
-    //si esta el cero en pantalla
-    if(document.getElementById("display").textContent == 0){
-     document.getElementById("display").innerHTML =""; 
-     document.getElementById("display").innerHTML = num.id;  
-     // si es diferente a cero y el cero es el inicial- lo elimina      
-    }else if(document.getElementById("display").textContent == 0 && num.id != 0){
-      document.getElementById("display").innerHTML ="";
-      document.getElementById("display").innerHTML = document.getElementById("display").textContent + num.id;
-    }else{
-      document.getElementById("display").innerHTML = document.getElementById("display").textContent + num.id; 
-    }
+  
+    // validar si es punto
+    if (num.id == 'punto'){
+      var punto = ".";      
+      var cadena = document.getElementById("display").textContent;   
+      var posicion = cadena.indexOf('.');     
+     if(posicion < 0 ){
+      document.getElementById("display").textContent = cadena + punto;    
+     }    //si se presion ON/C 
+    }else if(num.id == 'on'){
+      document.getElementById("display").textContent = 0;
+      //si esta el cero en pantalla
+      }else{ 
+        if(document.getElementById("display").textContent == 0){
+         document.getElementById("display").innerHTML =""; 
+         document.getElementById("display").innerHTML = num.id;  
+         // si es diferente a cero y el cero es el inicial- lo elimina      
+        }else if(document.getElementById("display").textContent == 0 && num.id != 0){
+          document.getElementById("display").innerHTML ="";
+          document.getElementById("display").innerHTML = document.getElementById("display").textContent + num.id;
+        }else{
+          document.getElementById("display").innerHTML = document.getElementById("display").textContent + num.id; 
+        }
+      }
     
   }
  
