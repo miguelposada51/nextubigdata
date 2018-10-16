@@ -35,14 +35,14 @@ Calculadora = (function () {
   // Private methods
   function displayOnScreen(num) {
   
-    // validar si es punto
+    // validar si es  tecla (.) punto
     if (num.id == 'punto'){
       var punto = ".";      
       var cadena = document.getElementById("display").textContent;   
       var posicion = cadena.indexOf('.');     
      if(posicion < 0 ){
       document.getElementById("display").textContent = cadena + punto;    
-     }    //si se presion ON/C 
+     } //si es tecla ON/C 
     }else if(num.id == 'on'){
       document.getElementById("display").textContent = 0;
       //si esta el cero en pantalla
