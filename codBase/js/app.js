@@ -46,10 +46,14 @@ Calculadora = (function () {
     }else if(num.id == 'on'){
       document.getElementById("display").textContent = 0;
       //si esta el cero en pantalla
-      }else{ 
-        if(document.getElementById("display").textContent == 0){
-         document.getElementById("display").innerHTML =""; 
-         document.getElementById("display").innerHTML = num.id;  
+    }else{       
+        if(document.getElementById("display").textContent == 0 ){
+          if(document.getElementById("display").textContent != '0.'){
+            document.getElementById("display").innerHTML =""; 
+            document.getElementById("display").innerHTML = num.id;
+          }else{          
+            document.getElementById("display").innerHTML = document.getElementById("display").textContent + num.id; 
+          }
          // si es diferente a cero y el cero es el inicial- lo elimina      
         }else if(document.getElementById("display").textContent == 0 && num.id != 0){
           document.getElementById("display").innerHTML ="";
