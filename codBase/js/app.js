@@ -12,11 +12,23 @@ Calculadora = (function () {
       var classname = document.getElementsByClassName("tecla");
       // al hacer clck en cualquier tecla
     var obtenerId = function() {
+
+      if(this.getAttribute("id") == 'on'){
+       document.getElementById("display").textContent = 0;      
+      }
+
         var attribute = this.getAttribute("id");
-        //adicionar a la pantalla        
+        //adicionar a la pantalla 
+        var input =  document.getElementById("display");
+        
+          if (input.textContent.length > 7) {
+            console.log(input.textContent.length);
+             document.getElementById("display").maxLength = 8;
+          }else{           
         displayOnScreen(document.getElementById(attribute));
         //expandir y contraer al hacer click
         expanTecla(this);         
+          }
     };
 
     for (var i = 0; i < classname.length; i++) {
@@ -35,6 +47,7 @@ Calculadora = (function () {
   // Private methods
   function displayOnScreen(num) {
   
+
     // validar si es  tecla (.) punto
     if (num.id == 'punto'){
       var punto = ".";      
@@ -43,8 +56,14 @@ Calculadora = (function () {
      if(posicion < 0 ){
       document.getElementById("display").textContent = cadena + punto;    
      } //si es tecla ON/C 
-    }else if(num.id == 'on'){
-      document.getElementById("display").textContent = 0;
+    }else if(num.id == 'sign'){
+      if(document.getElementById("display").textContent != 0 ){
+        if(document.getElementById("display").textContent < 0){
+          document.getElementById("display").innerHTML = document.getElementById("display").textContent.substring(1);          
+        }else{
+          document.getElementById("display").innerHTML = "-"  + document.getElementById("display").textContent;
+        }
+      }
       //si esta el cero en pantalla
     }else{       
         if(document.getElementById("display").textContent == 0 ){
