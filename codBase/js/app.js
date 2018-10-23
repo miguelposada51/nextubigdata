@@ -13,16 +13,17 @@ Calculadora = (function () {
       // al hacer clck en cualquier tecla
     var obtenerId = function() {
 
-      if(this.getAttribute("id") == 'on'){
-       document.getElementById("display").textContent = 0;      
-      }
-
-        var attribute = this.getAttribute("id");
+       var attribute = this.getAttribute("id");
         //adicionar a la pantalla 
         var input =  document.getElementById("display");
+
+      if(this.getAttribute("id") == 'on'){       
+        document.getElementById("display").innerHTML = "";      
+        attribute = 0;   
+      }       
         
           if (input.textContent.length > 7) {
-            console.log(input.textContent.length);
+            
              document.getElementById("display").maxLength = 8;
           }else{           
         displayOnScreen(document.getElementById(attribute));
@@ -42,12 +43,12 @@ Calculadora = (function () {
     setTimeout(function(){ tecla.style.width ='77px' }, 300);
     setTimeout(function(){ tecla.style.height ='62.5' }, 300);   
   }
-
+  function teclaClick(){
+    console.log("exitoso");
+  }
  
   // Private methods
   function displayOnScreen(num) {
-  
-
     // validar si es  tecla (.) punto
     if (num.id == 'punto'){
       var punto = ".";      
@@ -67,17 +68,18 @@ Calculadora = (function () {
       //si esta el cero en pantalla
     }else{       
         if(document.getElementById("display").textContent == 0 ){
+          
           if(document.getElementById("display").textContent != '0.'){
             document.getElementById("display").innerHTML =""; 
             document.getElementById("display").innerHTML = num.id;
           }else{          
-            document.getElementById("display").innerHTML = document.getElementById("display").textContent + num.id; 
+            document.getElementById("display").innerHTML = document.getElementById("display").textContent + num.id;            
           }
          // si es diferente a cero y el cero es el inicial- lo elimina      
         }else if(document.getElementById("display").textContent == 0 && num.id != 0){
           document.getElementById("display").innerHTML ="";
           document.getElementById("display").innerHTML = document.getElementById("display").textContent + num.id;
-        }else{
+        }else{        
           document.getElementById("display").innerHTML = document.getElementById("display").textContent + num.id; 
         }
       }
@@ -86,11 +88,12 @@ Calculadora = (function () {
  
   // Public API
   return {
-    publicMethod: function () {
-      alert("si");
-    },
+    teclaClick: teclaClick,
  
     anotherPublicMethod () {
+      console.log("tobarei");
     }
   }
 }());
+
+Calculadora.teclaClick();
