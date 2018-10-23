@@ -4,49 +4,32 @@ var Calculadora = {};
 // Library definition
 Calculadora = (function () {
   // Private variables / properties
-  var num, sum, concat;
-  
-
-   //uno.addEventListener("click", publicMethod);
-   window.onload=function(){
-      var classname = document.getElementsByClassName("tecla");
+  var num, sum, oper = "", tempo = [];  
       // al hacer clck en cualquier tecla
-    var obtenerId = function() {
-
-       var attribute = this.getAttribute("id");
+    function obtenerId () {
+     var attribute = this.getAttribute("id");
         //adicionar a la pantalla 
-        var input =  document.getElementById("display");
-
+     var input =  document.getElementById("display");
       if(this.getAttribute("id") == 'on'){       
         document.getElementById("display").innerHTML = "";      
-        attribute = 0;   
-      }       
-        
-          if (input.textContent.length > 7) {
-            
-             document.getElementById("display").maxLength = 8;
-          }else{           
-        displayOnScreen(document.getElementById(attribute));
-        //expandir y contraer al hacer click
-        expanTecla(this);         
-          }
-    };
-
-    for (var i = 0; i < classname.length; i++) {
-        classname[i].addEventListener('click', obtenerId, false);
+        attribute = 0;
+        tempo.splice(0, 40);//40 es valor arbitrario en caso que tenga 40 items   
+      }   
+      if (input.textContent.length > 7) {        
+         document.getElementById("display").maxLength = 8;
+      }else{           
+       displayOnScreen(document.getElementById(attribute));
+       //expandir y contraer al hacer click
+       expanTecla(this);         
+      }
     }
-   }
    
   function expanTecla(tecla){   
     document.getElementById(tecla.id).onmousedown =  tecla.style.width ='76.9px';
     document.getElementById(tecla.id).onmouseup = tecla.style.height ='62px';
     setTimeout(function(){ tecla.style.width ='77px' }, 300);
     setTimeout(function(){ tecla.style.height ='62.5' }, 300);   
-  }
-  function teclaClick(){
-    console.log("exitoso");
-  }
- 
+  } 
   // Private methods
   function displayOnScreen(num) {
     // validar si es  tecla (.) punto
@@ -65,10 +48,31 @@ Calculadora = (function () {
           document.getElementById("display").innerHTML = "-"  + document.getElementById("display").textContent;
         }
       }
-      //si esta el cero en pantalla
-    }else{       
-        if(document.getElementById("display").textContent == 0 ){
-          
+      //operaciones basicas (+-*/)
+    }else if(num.id == 'mas' || num.id == 'menos' || num.id == 'por' || num.id == 'dividido'){
+        switch(num.id){
+          case 'mas':
+              oper = "+";
+              break;
+          case 'menos':
+              oper = "-";
+              break;
+          case 'por':
+              oper = "*";
+              break;
+          case 'dividido':
+              oper = "/";
+              break;    
+        }        
+        tempo.push(document.getElementById("display").textContent,oper);
+        console.log(tempo);         
+    }else if(num.id == 'igual'){
+        console.log("resultado");
+    }else{     //si esta el cero en pantalla  
+      if(tempo.length > 0){
+            console.log("longitempo"+tempo.length);
+      }
+        if(document.getElementById("display").textContent == 0 ){          
           if(document.getElementById("display").textContent != '0.'){
             document.getElementById("display").innerHTML =""; 
             document.getElementById("display").innerHTML = num.id;
@@ -83,17 +87,23 @@ Calculadora = (function () {
           document.getElementById("display").innerHTML = document.getElementById("display").textContent + num.id; 
         }
       }
+      
     
   }
  
   // Public API
   return {
-    teclaClick: teclaClick,
- 
+   // teclaClick: teclaClick,
+    obtenerId: obtenerId,
     anotherPublicMethod () {
       console.log("tobarei");
     }
   }
 }());
 
-Calculadora.teclaClick();
+ window.onload=function(){
+    var classname = document.getElementsByClassName("tecla");
+    for (var i = 0; i < classname.length; i++) {
+      classname[i].addEventListener('click', Calculadora.obtenerId, false);
+    }
+ }
