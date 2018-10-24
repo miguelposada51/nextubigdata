@@ -69,15 +69,20 @@ Calculadora = (function () {
          console.log(tempo +"---"+document.getElementById("display").textContent.length);        
          tempo.push(document.getElementById("display").textContent,oper);
          console.log(tempo);  
+        }else{
+           tempo.push(oper);    
         }
-          estope = 1;      
+        estope = 1; 
     }else if(num.id == 'igual'){
-        console.log("resultado");
+        console.log("resultado"+tempo);
     }else{     //si esta el cero en pantalla  
       if(tempo.length > 0){
            tempo.push(num.id);
            document.getElementById("display").innerHTML =""; 
            console.log("en este: "+tempo); 
+           for (var i = 0; i <= tempo.length; i++) {
+             Things[i]
+           }
       }
         if(document.getElementById("display").textContent == 0 ){          
           if(document.getElementById("display").textContent != '0.'){
@@ -93,6 +98,7 @@ Calculadora = (function () {
         }else{        
           document.getElementById("display").innerHTML = document.getElementById("display").textContent + num.id; 
         }
+
       }
       
     
