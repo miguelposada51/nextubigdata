@@ -4,7 +4,7 @@ var Calculadora = {};
 // Library definition
 Calculadora = (function () {
   // Private variables / properties
-  var num, sum, oper = "", tempo = [];  
+  var num, estope = 0 , oper = "", tempo = [];  
       // al hacer clck en cualquier tecla
     function obtenerId () {
      var attribute = this.getAttribute("id");
@@ -13,7 +13,7 @@ Calculadora = (function () {
       if(this.getAttribute("id") == 'on'){       
         document.getElementById("display").innerHTML = "";      
         attribute = 0;
-        tempo.splice(0, 40);//40 es valor arbitrario en caso que tenga 40 items   
+        tempo = [];   
       }   
       if (input.textContent.length > 7) {        
          document.getElementById("display").maxLength = 8;
@@ -25,7 +25,7 @@ Calculadora = (function () {
     }
    
   function expanTecla(tecla){   
-    document.getElementById(tecla.id).onmousedown =  tecla.style.width ='76.9px';
+    document.getElementById(tecla.id).onmousedown =  tecla.style.width = '76.9px';
     document.getElementById(tecla.id).onmouseup = tecla.style.height ='62px';
     setTimeout(function(){ tecla.style.width ='77px' }, 300);
     setTimeout(function(){ tecla.style.height ='62.5' }, 300);   
@@ -63,14 +63,21 @@ Calculadora = (function () {
           case 'dividido':
               oper = "/";
               break;    
-        }        
-        tempo.push(document.getElementById("display").textContent,oper);
-        console.log(tempo);         
+        } 
+        console.log("estope"+estope);
+        if (estope == 0) {
+         console.log(tempo +"---"+document.getElementById("display").textContent.length);        
+         tempo.push(document.getElementById("display").textContent,oper);
+         console.log(tempo);  
+        }
+          estope = 1;      
     }else if(num.id == 'igual'){
         console.log("resultado");
     }else{     //si esta el cero en pantalla  
       if(tempo.length > 0){
-            console.log("longitempo"+tempo.length);
+           tempo.push(num.id);
+           document.getElementById("display").innerHTML =""; 
+           console.log("en este: "+tempo); 
       }
         if(document.getElementById("display").textContent == 0 ){          
           if(document.getElementById("display").textContent != '0.'){
